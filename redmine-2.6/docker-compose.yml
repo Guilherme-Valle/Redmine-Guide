@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - 'mariadb_data:/bitnami'
+  redmine:
+    image: 'redmine:2.6'
+    ports:
+      - '84:3000'
+    depends_on:
+      - mariadb
+volumes:
+  mariadb_data:
+    driver: local
+  redmine_data:
+    driver: local
